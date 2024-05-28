@@ -25,6 +25,15 @@ class BRException extends Exception {
 }
 
 public class EmpleadoBR {
+
+    public int banana(String s, int i) {
+        return 0;
+    }
+
+    public void papaya(int i) {
+        System.out.println("Papaya");
+    }
+
    //private String nombre;
    //otros atributos
     float calculaSalarioBruto(TipoEmpleado tipo, float ventasMes, float horasExtra)
