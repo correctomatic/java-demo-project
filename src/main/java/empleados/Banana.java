@@ -5,7 +5,7 @@ public class Banana {
     return 0;
   }
 
-  public void papaya(int i) {
+  protected void papaya(int i) {
       System.out.println("Papaya");
   }
 }

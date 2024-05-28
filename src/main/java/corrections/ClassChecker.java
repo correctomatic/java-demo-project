@@ -1,6 +1,7 @@
 package corrections;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.List;
 
 public class ClassChecker {
@@ -16,11 +17,17 @@ public class ClassChecker {
                 Class<?>[] parameterTypesArray = methodSignature.getParameterTypes().toArray(new Class<?>[0]);
 
                 // Check if the method exists with the specified parameter types
-                Method method = clazz.getMethod(methodSignature.getMethodName(), parameterTypesArray);
+                Method method = clazz.getDeclaredMethod(methodSignature.getMethodName(), parameterTypesArray);
 
                 // Check if the return type matches
                 if (!method.getReturnType().equals(methodSignature.getReturnType())) {
                     System.out.println("Method " + methodSignature.getMethodName() + " has incorrect return type.");
+                    return false;
+                }
+
+                // Check if the access modifier matches
+                if (!modifierMatches(method.getModifiers(), methodSignature.getAccessModifier())) {
+                    System.out.println("Method " + methodSignature.getMethodName() + " has incorrect access modifier.");
                     return false;
                 }
             }
@@ -40,11 +47,26 @@ public class ClassChecker {
         }
     }
 
+    private static boolean modifierMatches(int modifiers, String accessModifier) {
+        switch (accessModifier.toLowerCase()) {
+            case "public":
+                return Modifier.isPublic(modifiers);
+            case "protected":
+                return Modifier.isProtected(modifiers);
+            case "private":
+                return Modifier.isPrivate(modifiers);
+            case "default":
+                return !Modifier.isPublic(modifiers) && !Modifier.isProtected(modifiers) && !Modifier.isPrivate(modifiers);
+            default:
+                throw new IllegalArgumentException("Unknown access modifier: " + accessModifier);
+        }
+    }
+
     public static void main(String[] args) {
         // Example usage
         List<MethodSignature> methodSignatures = List.of(
-            new MethodSignature("banana", List.of(String.class, int.class), int.class),
-            new MethodSignature("papaya", List.of(int.class), void.class)
+            new MethodSignature("banana", List.of(String.class, int.class), int.class, "public"),
+            new MethodSignature("papaya", List.of(int.class), void.class, "protected")
         );
 
         ClassStructure classStructure = new ClassStructure("empleados.Banana", methodSignatures);
