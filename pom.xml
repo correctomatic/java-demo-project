@@ -37,18 +37,17 @@
           <scope>test</scope>
         </dependency>
 
-        <!-- Hamcrest -->
+        <!-- Used by ClassChecker -->
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
-            <scope>test</scope>
+          <groupId>org.yaml</groupId>
+          <artifactId>snakeyaml</artifactId>
+          <version>2.2</version>
         </dependency>
-
+        
         <dependency>
-          <groupId>joda-time</groupId>
-          <artifactId>joda-time</artifactId>
-          <version>2.9.2</version>
+          <groupId>com.fasterxml.jackson.dataformat</groupId>
+          <artifactId>jackson-dataformat-yaml</artifactId>
+          <version>2.13.0</version>
         </dependency>
 
       </dependencies>
