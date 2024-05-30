@@ -12,10 +12,12 @@ public class YamlLoader {
     public static ClassStructure loadClassStructure(InputStream inputStream) throws IOException{
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
-        // Order order = mapper.readValue(new File("src/main/resources/orderInput.yaml"), Order.class);
+        // String filename = "/home/alvaro/Software/correctomatic/java-demo-project/foo.yaml";
         String filename = "/home/alvaro/Software/correctomatic/java-demo-project/banana_definition.yaml";
         File file = new File(filename);
-        ClassStructure classStructure = mapper.readValue(file, ClassStructure.class);
+        // Foo f = mapper.readValue(file, Foo.class);
+        ClassStructure c = mapper.readValue(file, ClassStructure.class);
+        System.out.println(c);
 
         // SimpleModule module = new SimpleModule();
         // module.addDeserializer(MethodSignature.class, new MethodSignatureDeserializer());

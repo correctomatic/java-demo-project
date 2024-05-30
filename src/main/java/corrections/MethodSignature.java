@@ -8,6 +8,9 @@ public class MethodSignature {
     private Class<?> returnType;
     private String accessModifier;
 
+    public MethodSignature() {
+    }
+
     public MethodSignature(String methodName, List<Class<?>> parameterTypes, Class<?> returnType, String accessModifier) {
         this.methodName = methodName;
         this.parameterTypes = parameterTypes;
@@ -18,16 +21,28 @@ public class MethodSignature {
     public String getMethodName() {
         return methodName;
     }
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
 
     public List<Class<?>> getParameterTypes() {
         return parameterTypes;
+    }
+    public void setParameterTypes(List<Class<?>> parameterTypes) {
+        this.parameterTypes = parameterTypes;
     }
 
     public Class<?> getReturnType() {
         return returnType;
     }
+    public void setReturnType(Class<?> returnType) {
+        this.returnType = returnType;
+    }
 
     public String getAccessModifier() {
         return accessModifier;
+    }
+    public void setAccessModifier(String accessModifier) {
+        this.accessModifier = accessModifier;
     }
 }

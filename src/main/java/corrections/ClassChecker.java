@@ -65,7 +65,7 @@ public class ClassChecker {
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void mainFOO(String[] args) throws Exception{
         // Example usage
         List<MethodSignature> methodSignatures = List.of(
             new MethodSignature("banana", List.of(String.class, int.class), int.class, "public"),
