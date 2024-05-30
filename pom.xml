@@ -38,12 +38,12 @@
         </dependency>
 
         <!-- Used by ClassChecker -->
-        <dependency>
+        <!-- <dependency>
           <groupId>org.yaml</groupId>
           <artifactId>snakeyaml</artifactId>
           <version>2.2</version>
-        </dependency>
-        
+        </dependency> -->
+
         <dependency>
           <groupId>com.fasterxml.jackson.dataformat</groupId>
           <artifactId>jackson-dataformat-yaml</artifactId>

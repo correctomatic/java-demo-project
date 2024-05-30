@@ -74,7 +74,8 @@ public class ClassChecker {
 
         ClassStructure classStructure = new ClassStructure("empleados.Banana", methodSignatures);
 
-        try (FileInputStream inputStream = new FileInputStream("/data/alvaro/Software/correctomatic/java-demo-project/banana_definition.yaml")) {
+        String filename = "/home/alvaro/Software/correctomatic/java-demo-project/banana_definition.yaml";
+        try (FileInputStream inputStream = new FileInputStream(filename)) {
             ClassStructure classStructure2 = YamlLoader.loadClassStructure(inputStream);
             System.out.println("Class Name: " + classStructure.getClassName());
             for (MethodSignature method : classStructure.getMethodSignatures()) {
