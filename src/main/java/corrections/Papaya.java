@@ -1,7 +1,5 @@
 package corrections;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -38,10 +36,10 @@ public class Papaya {
     ClassStructure c;
     boolean isValid;
 
-    // c = byHand();
-    // printStructure(c);
-    // isValid = ClassChecker.validateClassStructure(c);
-    // System.out.println("Validation result: " + isValid);
+    c = byHand();
+    printStructure(c);
+    isValid = ClassChecker.validateClassStructure(c);
+    System.out.println("Validation result: " + isValid);
 
     String file = "/home/alvaro/Software/correctomatic/java-demo-project/banana_definition.yaml";
     c = fromFile(file);
