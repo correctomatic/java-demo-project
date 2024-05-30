@@ -30,14 +30,8 @@ public class Papaya {
 
 
   private static ClassStructure fromFile(String filename) throws IOException {
-
-    try (FileInputStream inputStream = new FileInputStream(filename)) {
-      ClassStructure c = YamlLoader.loadClassStructure(inputStream);
-      return c;
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-      return null;
-    }
+    ClassStructure c = YamlLoader.loadClassStructure(filename);
+    return c;
   }
 
   public static void main(String[] args) throws Exception{

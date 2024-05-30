@@ -1,11 +1,7 @@
 package corrections;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.List;
-
 
 public class ClassChecker {
 
@@ -63,32 +59,5 @@ public class ClassChecker {
             default:
                 throw new IllegalArgumentException("Unknown access modifier: " + accessModifier);
         }
-    }
-
-    public static void mainFOO(String[] args) throws Exception{
-        // Example usage
-        List<MethodSignature> methodSignatures = List.of(
-            new MethodSignature("banana", List.of(String.class, int.class), int.class, "public"),
-            new MethodSignature("papaya", List.of(int.class), void.class, "protected")
-        );
-
-        ClassStructure classStructure = new ClassStructure("empleados.Banana", methodSignatures);
-
-        String filename = "/home/alvaro/Software/correctomatic/java-demo-project/banana_definition.yaml";
-        try (FileInputStream inputStream = new FileInputStream(filename)) {
-            ClassStructure classStructure2 = YamlLoader.loadClassStructure(inputStream);
-            System.out.println("Class Name: " + classStructure.getClassName());
-            for (MethodSignature method : classStructure.getMethodSignatures()) {
-                System.out.println("Method Name: " + method.getMethodName());
-                System.out.println("Parameter Types: " + method.getParameterTypes());
-                System.out.println("Return Type: " + method.getReturnType());
-                System.out.println("Access Modifier: " + method.getAccessModifier());
-        }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        boolean isValid = validateClassStructure(classStructure);
-        System.out.println("Validation result: " + isValid);
     }
 }
