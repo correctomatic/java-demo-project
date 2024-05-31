@@ -17,10 +17,11 @@ public class ClassChecker {
     }
 
     public boolean isValid() {
-        if(validated) {
-            return valid;
-        }
+        if(validated) return valid;
+        return validate();
+    }
 
+    private boolean validate() {
         errors = new ArrayList<>();
 
         Boolean validationResult = true;
@@ -106,6 +107,7 @@ public class ClassChecker {
     }
 
     public List<String> getErrors() {
+        if(!validated) validate();
         return errors;
     }
 
