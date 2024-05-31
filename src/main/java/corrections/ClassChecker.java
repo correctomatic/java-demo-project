@@ -35,13 +35,12 @@ public class ClassChecker {
                 Method method;
 
                 // Convert parameter types from List<Class<?>> to array
-                // Class<?>[] parameterTypesArray = methodSignature.getParameterTypes().toArray(new Class<?>[0]);
                 Class<?>[] parameterTypesArray = this.parameterTypesToArray(methodSignature.getParameterTypes());
 
                 try {
                     method = clazz.getDeclaredMethod(methodSignature.getMethodName(), parameterTypesArray);
                 } catch (NoSuchMethodException e) {
-                    errors.add("Method " + methodSignature.getMethodName() + " not found.");
+                    errors.add("Method " + getMethodSignatureString(methodSignature) + " not found.");
                     validationResult = false;
                     continue;
                 }
@@ -86,7 +85,26 @@ public class ClassChecker {
                 throw new IllegalArgumentException("Unknown access modifier: " + accessModifier);
         }
     }
-    
+
+    private String getMethodSignatureString(MethodSignature methodSignature) {
+        StringBuilder signature = new StringBuilder();
+        signature.append(methodSignature.getMethodName());
+        signature.append("(");
+
+        List<Class<?>> parameterTypes = methodSignature.getParameterTypes();
+        if (parameterTypes != null) {
+            for (int i = 0; i < parameterTypes.size(); i++) {
+                if (i > 0) {
+                    signature.append(", ");
+                }
+                signature.append(parameterTypes.get(i).getSimpleName());
+            }
+        }
+
+        signature.append(")");
+        return signature.toString();
+    }
+
     public List<String> getErrors() {
         return errors;
     }

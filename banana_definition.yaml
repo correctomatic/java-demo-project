@@ -1,9 +1,9 @@
 className: empleados.Banana
 methodSignatures:
-  - methodName: bananaNA
+  - methodName: banana
     parameterTypes:
       - java.lang.String
-      - int
+      - boolean
     returnType: int
     accessModifier: public
   - methodName: papaya
