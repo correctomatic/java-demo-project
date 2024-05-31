@@ -12,7 +12,6 @@ public class YamlLoader {
     try {
         File file = new File(filename);
         ClassStructure c = mapper.readValue(file, ClassStructure.class);
-        System.out.println(c);
         return c;
     } catch (Exception e) {
         throw new RuntimeException("Failed to load class structure from YAML", e);

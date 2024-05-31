@@ -30,10 +30,6 @@ public class EmpleadoBR {
         return 0;
     }
 
-    public void papaya(int i) {
-        System.out.println("Papaya");
-    }
-
    //private String nombre;
    //otros atributos
     float calculaSalarioBruto(TipoEmpleado tipo, float ventasMes, float horasExtra)

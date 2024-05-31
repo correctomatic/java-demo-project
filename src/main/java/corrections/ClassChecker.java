@@ -7,13 +7,13 @@ import java.util.List;
 
 public class ClassChecker {
 
-    private ClassStructure classStructure;
+    private ClassStructure cs;
     private List<String> errors = new ArrayList<>();
     private Boolean validated = false;
     private Boolean valid = false;
 
     public ClassChecker(ClassStructure c) {
-        classStructure = c;
+        cs = c;
     }
 
     public boolean isValid() {
@@ -27,10 +27,10 @@ public class ClassChecker {
 
         try {
             // Load the class
-            Class<?> clazz = Class.forName(classStructure.getClassName());
+            Class<?> clazz = Class.forName(cs.getClassName());
 
             // Validate each method signature
-            for (MethodSignature methodSignature : classStructure.getMethodSignatures()) {
+            for (MethodSignature methodSignature : cs.getMethodSignatures()) {
 
                 Method method;
 
@@ -40,26 +40,26 @@ public class ClassChecker {
                 try {
                     method = clazz.getDeclaredMethod(methodSignature.getMethodName(), parameterTypesArray);
                 } catch (NoSuchMethodException e) {
-                    errors.add("Method " + getMethodSignatureString(methodSignature) + " not found.");
+                    errors.add(cs.getClassName() + ": Method " + getMethodSignatureString(methodSignature) + ": " + methodSignature.getReturnType() + " not found.");
                     validationResult = false;
                     continue;
                 }
 
                 // Check if the return type matches
                 if (!method.getReturnType().equals(methodSignature.getReturnType())) {
-                    errors.add("Method " + methodSignature.getMethodName() + " has incorrect return type.");
+                    errors.add(cs.getClassName() + ": Method " + methodSignature.getMethodName() + " has incorrect return type.");
                     validationResult = false;
                 }
 
                 // Check if the access modifier matches
                 if (!modifierMatches(method.getModifiers(), methodSignature.getAccessModifier())) {
-                    errors.add("Method " + methodSignature.getMethodName() + " has incorrect access modifier.");
+                    errors.add(cs.getClassName() + ": Method " + methodSignature.getMethodName() + " has incorrect access modifier.");
                     validationResult = false;
                 }
             }
 
         } catch (ClassNotFoundException e) {
-            errors.add("Class " + classStructure.getClassName() + " does not exist.");
+            errors.add("Class " + cs.getClassName() + " does not exist.");
             validationResult = false;
         } catch (SecurityException e) {
             errors.add("Security exception encountered: " + e.getMessage());

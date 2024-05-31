@@ -28,12 +28,6 @@ public class DirectoryChecker {
         return directory.listFiles(yamlFilter);
     }
 
-    private boolean processFile(File yamlFile, List<String> errors) {
-        ClassChecker cc = new ClassChecker(YamlLoader.loadClassStructure(yamlFile.getAbsolutePath()));
-        errors.addAll(cc.getErrors());
-        return cc.isValid();
-    }
-
     public List<String> getErrors() {
         return errors;
     }
@@ -59,7 +53,9 @@ public class DirectoryChecker {
         boolean result = true;
 
         for (File yamlFile : yamlFiles) {
-            result = result && processFile(yamlFile, errors);
+            ClassChecker cc = new ClassChecker(YamlLoader.loadClassStructure(yamlFile.getAbsolutePath()));
+            errors.addAll(cc.getErrors());
+            result = result && cc.isValid();
         }
         return result;
     }
