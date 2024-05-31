@@ -34,7 +34,7 @@ public class Papaya {
     return c;
   }
 
-  public static void main(String[] args) throws Exception{
+  public static void mainLALALA(String[] args) throws Exception{
     ClassStructure c;
     boolean isValid;
 

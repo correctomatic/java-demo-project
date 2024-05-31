@@ -8,7 +8,25 @@ import java.io.FilenameFilter;
  */
 public class DirectoryChecker {
 
-    public static void main(String directoryPath ) {
+    public static void main(String[] args) {
+        // File currentDir = new File(".");
+
+        // try {
+        //     // Get the canonical path of the current directory
+        //     String canonicalPath = currentDir.getCanonicalPath();
+
+        //     // Print the current directory
+        //     System.out.println("Current directory: " + canonicalPath);
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+        papaya("./definitions");
+    }
+
+    public static void papaya(String directoryPath ) {
+
+        System.out.println("Checking directory: " + directoryPath);
+
         File directory = new File(directoryPath);
 
         if (!directory.isDirectory()) {
@@ -33,8 +51,14 @@ public class DirectoryChecker {
         }
 
         // Process each .yaml file
+        ClassChecker cc;
         for (File yamlFile : yamlFiles) {
-            // Banana.papaya(yamlFile.getAbsolutePath());
+            System.out.println("Processing file: " + yamlFile.getName());
+            cc = new ClassChecker(YamlLoader.loadClassStructure(yamlFile.getAbsolutePath()));
+            System.out.println(cc.isValid());
+            for (String error : cc.getErrors()) {
+                System.out.println(error);
+            }
         }
     }
 }

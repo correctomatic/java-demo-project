@@ -1,0 +1,13 @@
+className: empleados.Banana
+methodSignatures:
+  - methodName: banana
+    parameterTypes:
+      - java.lang.String
+      - int
+    returnType: int
+    accessModifier: public
+  - methodName: papaya
+    parameterTypes:
+      - int
+    returnType: void
+    accessModifier: protected
