@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ClassChecker {
 
-    private List<String> errors = new ArrayList<>();
     private ClassStructure classStructure;
+    private List<String> errors = new ArrayList<>();
     private Boolean validated = false;
     private Boolean valid = false;
 

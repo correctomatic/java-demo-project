@@ -17,21 +17,21 @@ public class Papaya {
     }
   }
 
-  private static ClassStructure byHand() {
-    // Example usage
-    List<MethodSignature> methodSignatures = List.of(
-        new MethodSignature("banana", List.of(String.class, int.class), int.class, "public"),
-        new MethodSignature("papaya", List.of(int.class), void.class, "protected")
-    );
-
-    ClassStructure classStructure = new ClassStructure("empleados.Banana", methodSignatures);
-    return classStructure;
-  }
-
-
   private static ClassStructure fromFile(String filename) throws IOException {
     ClassStructure c = YamlLoader.loadClassStructure(filename);
     return c;
+  }
+
+  public static void main(String[] args) {
+    ArrayList<String> errors;
+    String path = "./definitions";
+    DirectoryChecker dc = new DirectoryChecker(path);
+    boolean isValid = dc.isValid();
+    errors = (ArrayList<String>) dc.getErrors();
+    System.out.println("Validation result: " + isValid);
+    for (String error : errors) {
+      System.out.println(error);
+    }
   }
 
   public static void mainLALALA(String[] args) throws Exception{
@@ -40,16 +40,6 @@ public class Papaya {
 
     ClassChecker cc;
     ArrayList<String> errors;
-
-    // c = byHand();
-    // // printStructure(c);
-    // cc = new ClassChecker(c);
-    // isValid = cc.isValid();
-    // errors = (ArrayList<String>) cc.getErrors();
-    // System.out.println("Validation result: " + isValid);
-    // for (String error : errors) {
-    //   System.out.println(error);
-    // }
 
     String file = "/home/alvaro/Software/correctomatic/java-demo-project/banana_definition.yaml";
     c = fromFile(file);

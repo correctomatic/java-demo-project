@@ -2,38 +2,22 @@ package corrections;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * This class checks a directory for .yaml files and processes them using the ClassChecker.
  */
 public class DirectoryChecker {
 
-    public static void main(String[] args) {
-        // File currentDir = new File(".");
+    private String path;
+    private List<String> errors = new ArrayList<>();
 
-        // try {
-        //     // Get the canonical path of the current directory
-        //     String canonicalPath = currentDir.getCanonicalPath();
-
-        //     // Print the current directory
-        //     System.out.println("Current directory: " + canonicalPath);
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-        papaya("./definitions");
+    public DirectoryChecker(String path) {
+        this.path = path;
     }
 
-    public static void papaya(String directoryPath ) {
-
-        System.out.println("Checking directory: " + directoryPath);
-
-        File directory = new File(directoryPath);
-
-        if (!directory.isDirectory()) {
-            System.out.println("The provided path is not a directory.");
-            return;
-        }
-
+    private File[] getYamlFiles(File directory) {
         // Filter to get only .yaml files
         FilenameFilter yamlFilter = new FilenameFilter() {
             @Override
@@ -41,24 +25,42 @@ public class DirectoryChecker {
                 return name.toLowerCase().endsWith(".yaml");
             }
         };
+        return directory.listFiles(yamlFilter);
+    }
 
-        // Get the list of .yaml files in the directory
-        File[] yamlFiles = directory.listFiles(yamlFilter);
+    private boolean processFile(File yamlFile, List<String> errors) {
+        ClassChecker cc = new ClassChecker(YamlLoader.loadClassStructure(yamlFile.getAbsolutePath()));
+        errors.addAll(cc.getErrors());
+        return cc.isValid();
+    }
+
+    public List<String> getErrors() {
+        return errors;
+    }
+
+    public boolean isValid() {
+        // Clear errors
+        errors = new ArrayList<>();
+
+        File directory = new File(path);
+
+        if (!directory.isDirectory()) {
+            throw new IllegalArgumentException("The provided path is not a directory.");
+        }
+
+        File[] yamlFiles = this.getYamlFiles(directory);
 
         if (yamlFiles == null || yamlFiles.length == 0) {
-            System.out.println("No .yaml files found in the directory.");
-            return;
+            // No files, no errors
+            return true;
         }
 
         // Process each .yaml file
-        ClassChecker cc;
+        boolean result = true;
+
         for (File yamlFile : yamlFiles) {
-            System.out.println("Processing file: " + yamlFile.getName());
-            cc = new ClassChecker(YamlLoader.loadClassStructure(yamlFile.getAbsolutePath()));
-            System.out.println(cc.isValid());
-            for (String error : cc.getErrors()) {
-                System.out.println(error);
-            }
+            result = result && processFile(yamlFile, errors);
         }
+        return result;
     }
 }
