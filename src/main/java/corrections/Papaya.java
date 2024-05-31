@@ -1,7 +1,9 @@
 package corrections;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Papaya {
 
@@ -36,16 +38,29 @@ public class Papaya {
     ClassStructure c;
     boolean isValid;
 
-    c = byHand();
-    printStructure(c);
-    isValid = ClassChecker.validateClassStructure(c);
-    System.out.println("Validation result: " + isValid);
+    ClassChecker cc;
+    ArrayList<String> errors;
+
+    // c = byHand();
+    // // printStructure(c);
+    // cc = new ClassChecker(c);
+    // isValid = cc.isValid();
+    // errors = (ArrayList<String>) cc.getErrors();
+    // System.out.println("Validation result: " + isValid);
+    // for (String error : errors) {
+    //   System.out.println(error);
+    // }
 
     String file = "/home/alvaro/Software/correctomatic/java-demo-project/banana_definition.yaml";
     c = fromFile(file);
-    printStructure(c);
-    isValid = ClassChecker.validateClassStructure(c);
+    // printStructure(c);
+    cc = new ClassChecker(c);
+    isValid = cc.isValid();
+    errors = (ArrayList<String>) cc.getErrors();
     System.out.println("Validation result: " + isValid);
+    for (String error : errors) {
+      System.out.println(error);
+    }
   }
 
 }

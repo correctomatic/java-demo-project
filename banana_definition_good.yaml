@@ -1,6 +1,6 @@
 className: empleados.Banana
 methodSignatures:
-  - methodName: bananaNA
+  - methodName: banana
     parameterTypes:
       - java.lang.String
       - int
@@ -9,9 +9,5 @@ methodSignatures:
   - methodName: papaya
     parameterTypes:
       - int
-    returnType: int
+    returnType: void
     accessModifier: protected
-  - methodName: asereje
-    returnType: boolean
-  - methodName: papaya
-    returnType: int
