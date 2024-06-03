@@ -1,0 +1,15 @@
+className: empleados.EmpleadoBR
+methodSignatures:
+  - methodName: calculaSalarioBruto
+    parameterTypes:
+      - empleado.TipoEmpleado
+      - float
+      - float
+    returnType: float
+    accessModifier: public
+
+  - methodName: calculaSalarioNeto
+    parameterTypes:
+      - float
+    returnType: float
+    accessModifier: public
