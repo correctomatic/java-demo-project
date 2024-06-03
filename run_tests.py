@@ -57,6 +57,29 @@ if compile_result.returncode != 0:
     exit(0)
 
 log("Compilation successful!")
+
+log("Reflection tests...")
+def run_check_definitions(directory_path):
+    try:
+        result = subprocess.run(
+            ['java', '-cp', classpath,
+             'corrections.CheckDefinitions', directory_path
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+            text=True
+        )
+        print("Standard Output:")
+        print(result.stdout)
+        print("Standard Error:")
+        print(result.stderr)
+    except subprocess.CalledProcessError as e:
+        print("An error occurred while running the Java program:")
+        print(e.stderr)
+
+run_check_definitions('/class_definitions')
+
 log("Running the tests...")
 
 # Run the JUnit Console Launcher to execute the tests
@@ -127,7 +150,6 @@ def get_failed_tests(file_path):
 # Create the JSON output
 success_message = {
     'success': True,
-    'grade': 0,
     'comments': get_failed_tests(REPORTS_FILE)
 }
 print(json.dumps(success_message))

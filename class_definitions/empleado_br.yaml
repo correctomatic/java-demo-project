@@ -2,7 +2,7 @@ className: empleados.EmpleadoBR
 methodSignatures:
   - methodName: calculaSalarioBruto
     parameterTypes:
-      - empleado.TipoEmpleado
+      - empleados.TipoEmpleado
       - float
       - float
     returnType: float

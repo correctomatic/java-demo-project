@@ -30,8 +30,14 @@ public class ClassChecker {
             // Load the class
             Class<?> clazz = Class.forName(cs.getClassName());
 
+
+            List<MethodSignature> methodSignatures = cs.getMethodSignatures();
+
+            // No methods, no errors
+            if (methodSignatures == null) return true;
+
             // Validate each method signature
-            for (MethodSignature methodSignature : cs.getMethodSignatures()) {
+            for (MethodSignature methodSignature : methodSignatures) {
 
                 Method method;
 

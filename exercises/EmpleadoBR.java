@@ -28,7 +28,7 @@ public class EmpleadoBR {
 
    //private String nombre;
    //otros atributos
-    public float calculaSalarioBruto(TipoEmpleado tipo, float ventasMes, float horasExtra)
+    float calculaSalarioBruto(TipoEmpleado tipo, float ventasMes, float horasExtra)
             throws BRException {
         int salarioBase;
 

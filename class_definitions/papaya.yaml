@@ -1,8 +1,8 @@
 className: empleados.Papaya
-methodSignatures:
-  - methodName: asereje
-    parameterTypes:
-      - boolean
-      - int
-    returnType: int
-    accessModifier: private
+# methodSignatures:
+#   - methodName: asereje
+#     parameterTypes:
+#       - boolean
+#       - int
+#     returnType: int
+#     accessModifier: private
